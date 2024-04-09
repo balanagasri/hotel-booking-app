@@ -23,7 +23,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 
 const accessTokenOptions = {
     httpOnly: true,
-    samesite: 'none',
+    SameSite: 'none',
     secure: NODE_ENV === 'production',
     maxAge: 1000 * 60 * 60 * 24, // 1 days
 };
