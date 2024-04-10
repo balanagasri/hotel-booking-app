@@ -1,12 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
 
 // Routes import...
 import { hotelRoutes } from './routes/hotels.routes.js';
 import { authRoutes } from './routes/auth.routes.js';
-import { FRONTEND_URL, NODE_ENV } from './conf/index.js';
+import { FRONTEND_URL } from './conf/index.js';
 import { myBookingRoutes } from './routes/my-bookings.routes.js';
 
 // import path from 'path';
@@ -26,23 +25,6 @@ const corsOptions = {
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Access-Control-Allow-Origin', 'Content-Type', 'Authorization'],
 };
-
-const sessionConfig = {
-    secret: 'MYSECRET',
-    name: 'appName',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        sameSite: 'none',
-    },
-};
-
-if (NODE_ENV === 'production') {
-    app.set('trust proxy', 1);
-    sessionConfig.cookie.secure = true;
-}
-
-app.use(session(sessionConfig));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
